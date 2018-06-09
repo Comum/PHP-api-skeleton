@@ -1,9 +1,20 @@
 <?php
     class Hello extends Controller {
+        protected $route = 'hello';
+
         public function index($name = '') {
-            $post_data = json_encode(array('hello' => $name), JSON_FORCE_OBJECT);
+            $response = $this->generateResponse($name);
+            $post_data = json_encode($response, JSON_FORCE_OBJECT);
 
             echo $post_data;
+        }
+
+        private function generateResponse($name) {
+            if (!$name) {
+                return $this->getErrorResponse($this->route);
+            }
+
+            return array('hello' => $name);
         }
     }
 ?>

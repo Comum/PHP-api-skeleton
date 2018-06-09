@@ -14,6 +14,8 @@
             if (file_exists('../app/controllers/' . $url[0] . '.php')) {
                 $this->controller = $url[0];
                 unset($url[0]);
+            } else {
+                $this->controller = 'routeNotFound';
             }
 
             require_once '../app/controllers/' . $this->controller . '.php';
